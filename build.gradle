@@ -44,7 +44,7 @@ dependencies {
 }
 
 minecraft {
-    version = "1.7.10-10.13.0.1200"
+    version = ""1.8-11.14.0.1295-1.8"
     assetDir = "eclipse/assets"
 }
 
