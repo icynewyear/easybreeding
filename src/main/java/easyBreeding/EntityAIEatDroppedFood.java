@@ -49,11 +49,11 @@ public class EntityAIEatDroppedFood extends EntityAIBase
 		return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX, animal.posY, animal.posZ, animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
   }
   
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public boolean shouldExecute()
   {
     EntityItem closeFood = whatFoodIsNear();
     
-//    return targetMate != null;
     if ((closeFood != null) 
     		//Don't know what this is???
     		//&& (this.animal.inLove <= 0) 
@@ -63,7 +63,8 @@ public class EntityAIEatDroppedFood extends EntityAIBase
     }
     return false;
   }
-  
+ 
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public boolean execute(EntityAnimal enta, EntityItem enti)
   {
     if (enta.getNavigator().tryMoveToXYZ(enti.posX, enti.posY, enti.posZ, 0.25F)) {
