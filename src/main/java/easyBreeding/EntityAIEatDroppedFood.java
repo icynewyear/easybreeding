@@ -31,7 +31,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
     {
     	EntityItem stack = item;  
     	
-    	if(items != null && items instanceof ItemFood)
+    	if(items != null)
     	{
     		return stack;
     	}
@@ -50,7 +50,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
     if ((closeFood != null) 
     		//Don't know what this is???
     		//&& (this.animal.inLove <= 0) 
-    		&& (!this.animal.isChild()) && (this.animal.getGrowingAge() == 0)) 
+    		&& (!this.animal.isChild()) && (this.animal.getGrowingAge() == 0) && (!this.animal.isInLove()) && (this.animal.isBreedingItem(closeFood.getEntityItem()))) 
     {
       execute(this.animal, closeFood);
     }
@@ -63,6 +63,8 @@ public class EntityAIEatDroppedFood extends EntityAIBase
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
         enti.setDead();
+     //  enta.isInLove(true);
+        
       }
     }
     return true;
