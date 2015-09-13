@@ -1,50 +1,57 @@
 package easyBreeding;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.entity.Entity;
+
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.tileentity.TileEntitySkull;
-import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.item.ItemFood;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
-public class EntityAIEatDroppedFood
-  extends EntityAIBase
+public class EntityAIEatDroppedFood extends EntityAIBase
 {
   private EntityAnimal animal;
   private Random rand = new Random();
+  private World world = null;
   
   public EntityAIEatDroppedFood(EntityAnimal ent)
   {
     this.animal = ent;
+    this.world = ent.worldObj;
   }
   
   public EntityItem whatFoodIsNear()
   {
-    ChunkCoordIntPair world = this.animal.p;
     float searchDistance = 8.0F;
-    EntityItem ei = new EntityItem(world);
-    List nearbyEntities = world.a(ei.getClass(), this.animal.D.b(searchDistance, searchDistance, searchDistance));
-    
-    Iterator iterate = nearbyEntities.iterator();
-    EntityItem check;
-    do
+    List<EntityItem> items = getItems();
+    //Turns the list into single Item Entity's
+    for(EntityItem item : items) 
     {
-      if (!iterate.hasNext()) {
-        return null;
-      }
-      check = (EntityItem)iterate.next();
-    } while (!this.animal.c(check.age));
-    return check;
+    	EntityItem stack = item;  
+    	
+    	if(items != null && items instanceof ItemFood)
+    	{
+    		return stack;
+    	}
+    }
+	return null;
+  }
+  // Gets all item entity's within one block of the animals pos, can be changed adds the to a list
+  List<EntityItem> getItems() 
+  {
+		return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX, animal.posY, animal.posZ, animal.posX + 1, animal.posY + 1, animal.posZ + 1));
   }
   
   public boolean shouldExecute()
   {
     EntityItem closeFood = whatFoodIsNear();
-    if ((closeFood != null) && (this.animal.inLove <= 0) && (!this.animal.isChild()) && (this.animal.getGrowingAge() == 0)) {
+    if ((closeFood != null) 
+    		//Don't know what this is???
+    		//&& (this.animal.inLove <= 0) 
+    		&& (!this.animal.isChild()) && (this.animal.getGrowingAge() == 0)) 
+    {
       execute(this.animal, closeFood);
     }
     return false;
@@ -55,8 +62,6 @@ public class EntityAIEatDroppedFood
     if (enta.getNavigator().tryMoveToXYZ(enti.posX, enti.posY, enti.posZ, 0.25F)) {
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
-        enta.p.a("heart", enta.posX, enta.posY + 0.05D, enta.posZ, 0.0D, 0.0D, 0.0D);
-        enta.inLove = 600;
         enti.setDead();
       }
     }
