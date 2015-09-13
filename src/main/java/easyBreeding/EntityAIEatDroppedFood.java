@@ -45,7 +45,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   // Gets all item entity's within one block of the animals pos, can be changed adds the to a list
   List<EntityItem> getItems() 
   {
-	return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.fromBounds(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
+	return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
 			animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
   }	
   
@@ -72,7 +72,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
         enti.setDead();
-        enta.setInLove(null);
+        enta.func_146082_f(null);
       }
     }
     return true;
