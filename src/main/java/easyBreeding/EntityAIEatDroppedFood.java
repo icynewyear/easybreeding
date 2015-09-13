@@ -19,8 +19,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   private EntityAnimal animal;
   private Random rand = new Random();
   private World world = null;
-  float searchDistance = 8.0F;
-
+  double searchDistance = 10;
   
   public EntityAIEatDroppedFood(EntityAnimal ent)
   {
@@ -46,8 +45,9 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   // Gets all item entity's within one block of the animals pos, can be changed adds the to a list
   List<EntityItem> getItems() 
   {
-		return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX, animal.posY, animal.posZ, animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
-  }
+	return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
+			animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
+  }	
   
   @SuppressWarnings({"rawtypes", "unchecked"})
   public boolean shouldExecute()
@@ -67,7 +67,8 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   @SuppressWarnings({"rawtypes", "unchecked"})
   public boolean execute(EntityAnimal enta, EntityItem enti)
   {
-    if (enta.getNavigator().tryMoveToXYZ(enti.posX, enti.posY, enti.posZ, 0.25F)) {
+    if (enta.getNavigator().tryMoveToXYZ(enti.posX, enti.posY, enti.posZ, 1.25F)) 
+    {
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
         enti.setDead();
