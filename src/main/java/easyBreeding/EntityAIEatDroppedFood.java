@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -71,10 +72,19 @@ public class EntityAIEatDroppedFood extends EntityAIBase
     {
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
-        enti.setDead();
+        eatOne(enti);
         enta.setInLove(null);
       }
     }
     return true;
+  }
+  
+  public void eatOne(EntityItem enti)
+  {
+	  ItemStack stack = enti.getEntityItem();
+	  
+	  stack.stackSize--;
+		if(stack.stackSize == 0)
+			enti.setDead();
   }
 }
