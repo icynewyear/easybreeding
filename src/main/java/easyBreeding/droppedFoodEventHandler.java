@@ -34,7 +34,7 @@ public class droppedFoodEventHandler
 			}
 			if (mob != null) 
 			{
-				mob.tasks.addTask(8, new EntityAIEatDroppedFood(mob));
+				mob.tasks.addTask(2, new EntityAIEatDroppedFood(mob));
 			}
 		}
 	}
