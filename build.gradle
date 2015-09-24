@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0.2"
-group= "com.icynewyear.easybreading" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "easybreading"
+version = "2.0.3"
+group= "com.icynewyear.easybreeding" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "easybreeding"
 
 def grabDep(name, url){
 	ant.get(src: url, dest: 'dep')
