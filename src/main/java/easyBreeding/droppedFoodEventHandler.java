@@ -5,6 +5,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -29,6 +30,9 @@ public class droppedFoodEventHandler
 			} else if (evt.entityLiving instanceof EntitySheep) 
 			{
 				mob = (EntitySheep) evt.entityLiving;
+			} else if (evt.entityLiving instanceof EntityRabbit)
+			{
+			        mob = (EntityRabbit) evt.entityLiving;
 			} else {
 				mob = null;
 			}
