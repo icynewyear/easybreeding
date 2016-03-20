@@ -1,18 +1,13 @@
 package easyBreeding;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityAIEatDroppedFood extends EntityAIBase
@@ -46,7 +41,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   // Gets all item entity's within one block of the animals pos, can be changed adds the to a list
   List<EntityItem> getItems() 
   {
-	return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.fromBounds(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
+	return world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
 			animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
   }	
   

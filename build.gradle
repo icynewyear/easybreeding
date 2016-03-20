@@ -17,42 +17,17 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "3.0.3"
+version = "1.9-4.0.0"
 group= "com.icynewyear.easybreeding" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "easybreeding"
 
-def grabDep(name, url){
-	ant.get(src: url, dest: 'dep')
-	file("dep/" + url.substring(url.lastIndexOf("/"))).renameTo(file("dep/" + name + ".jar"))
-}
-
-dependencies {
-    def f = new File('dep/')
-    if(f.exists()){
-        f.delete()
-    }
-    f.mkdirs()
-    if(!f.exists()){
-        f.mkdir()
-    }
-	println("  Downloading dependencies!")
-	grabDep('gbl', 'http://addons-origin.cursecdn.com/files/2230/518/Waila-1.5.10_1.7.10.jar')
-	
-	println("  Adding dependencies!")
-    compile files("dep/gbl.jar")
-	println("  Finished adding dependencies!")
-}
-
 minecraft {
-    version = "1.8.8-11.14.4.1586-1.8.8"
+    version = "1.9-12.16.0.1766-1.9"
     runDir = "run"
-    mappings = "snapshot_20151122"
+    mappings = "snapshot_20160312"
 }
 
 dependencies {
-	compile files (
-		'Waila-deobf.jar'
-	)
 }
 
 processResources
