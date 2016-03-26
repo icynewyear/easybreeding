@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.9-4.0.0"
+version = "1.9-4.0.1"
 group= "com.icynewyear.easybreeding" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "easybreeding"
 
 minecraft {
-    version = "1.9-12.16.0.1766-1.9"
+    version = "1.9-12.16.0.1811-1.9"
     runDir = "run"
     mappings = "snapshot_20160312"
 }

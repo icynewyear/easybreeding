@@ -13,22 +13,22 @@ public class droppedFoodEventHandler
 	@SubscribeEvent
 	public void addFoodtoAnimals(LivingEvent.LivingUpdateEvent evt) 
 	{
-		if ((evt.entityLiving.ticksExisted < 5) && (!evt.entityLiving.isChild())) 
+		if ((evt.getEntityLiving().ticksExisted < 5) && (!evt.getEntityLiving().isChild())) 
 		{
 			EntityAnimal mob;
 
-			if (evt.entityLiving instanceof EntityCow) 
+			if (evt.getEntityLiving() instanceof EntityCow) 
 			{
-				mob = (EntityCow) evt.entityLiving;
-			} else if (evt.entityLiving instanceof EntityPig) 
+				mob = (EntityCow) evt.getEntityLiving();
+			} else if (evt.getEntityLiving() instanceof EntityPig) 
 			{
-				mob = (EntityPig) evt.entityLiving;
-			} else if (evt.entityLiving instanceof EntityChicken) 
+				mob = (EntityPig) evt.getEntityLiving();
+			} else if (evt.getEntityLiving() instanceof EntityChicken) 
 			{
-				mob = (EntityChicken) evt.entityLiving;
-			} else if (evt.entityLiving instanceof EntitySheep) 
+				mob = (EntityChicken) evt.getEntityLiving();
+			} else if (evt.getEntityLiving() instanceof EntitySheep) 
 			{
-				mob = (EntitySheep) evt.entityLiving;
+				mob = (EntitySheep) evt.getEntityLiving();
 			} else {
 				mob = null;
 			}
