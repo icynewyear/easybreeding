@@ -1,18 +1,13 @@
 package easyBreeding;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityAIEatDroppedFood extends EntityAIBase
@@ -25,7 +20,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   public EntityAIEatDroppedFood(EntityAnimal ent)
   {
     this.animal = ent;
-    this.world = ent.worldObj;
+    this.world = ent.world;
   }
   
   public EntityItem whatFoodIsNear()
@@ -44,13 +39,13 @@ public class EntityAIEatDroppedFood extends EntityAIBase
 	return null;
   }
   // Gets all item entity's within one block of the animals pos, can be changed adds the to a list
-  List<EntityItem> getItems() 
+  List<EntityItem> getItems()
   {
-	return world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
-			animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
-  }	
-  
-  @SuppressWarnings({"rawtypes", "unchecked"})
+      return world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(animal.posX - searchDistance, animal.posY - searchDistance, animal.posZ - searchDistance,
+              animal.posX + searchDistance, animal.posY + searchDistance, animal.posZ + searchDistance));
+  }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
   public boolean shouldExecute()
   {
     EntityItem closeFood = whatFoodIsNear();
@@ -73,7 +68,7 @@ public class EntityAIEatDroppedFood extends EntityAIBase
       if (enta.getDistanceToEntity(enti) < 1.0F)
       {
         eatOne(enti);
-        enta.func_146082_f(null);
+        enta.setInLove(null);
       }
     }
     return true;
@@ -82,9 +77,8 @@ public class EntityAIEatDroppedFood extends EntityAIBase
   public void eatOne(EntityItem enti)
   {
 	  ItemStack stack = enti.getEntityItem();
-	  
-	  stack.stackSize--;
-		if(stack.stackSize == 0)
+      stack.setCount(stack.getCount() -1);
+		if(stack.getCount() == 0)
 			enti.setDead();
   }
 }

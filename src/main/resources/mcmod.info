@@ -1,14 +1,14 @@
 [
 {
-  "modid": "EasyBreeding",
+  "modid": "easybreeding",
   "name": "EasyBreeding",
   "description": "",
-  "version": "2.0.3",
+  "version": "4.0.1",
   "url": "",
   "updateUrl": "",
   "authorList": [
-    "Icynewyear"
-    
+    "Icynewyear",
+    "Gigabit101"
   ],
   "credits": "",
   "logoFile": "",
