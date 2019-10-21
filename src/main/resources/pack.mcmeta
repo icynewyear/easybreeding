@@ -1,0 +1,7 @@
+{
+    "pack": {
+        "description": "quantumstorage resources",
+        "pack_format": 4,
+        "_comment": "QuantumStorage's Resource pack"
+    }
+}
