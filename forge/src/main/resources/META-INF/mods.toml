@@ -1,15 +1,15 @@
 modLoader = "javafml"
 loaderVersion = "[35,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "GNU GENERAL PUBLIC LICENSE"
 
 [[mods]]
-modId = "examplemod"
+modId = "easybreeding"
 version = "${version}"
-displayName = "Example Mod"
-authors = "Me!"
+displayName = "EasyBreeding"
+authors = "Gigabit101, Icynewyear"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Easy Breeding adds the ability to breed animals (excepting Ocelots and Wolves) by tossing their breeding food on the ground near them.
 '''
 #logoFile = ""
 
@@ -20,16 +20,9 @@ versionRange = "[35,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.easybreeding]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.16.2,)"
 ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.examplemod]]
-modId = "architectury"
-mandatory = true
-versionRange = "[1.1.55,)"
-ordering = "AFTER"
 side = "BOTH"

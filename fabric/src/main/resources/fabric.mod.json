@@ -1,31 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "easybreeding",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "EasyBreeding",
+  "description": "Easy Breeding adds the ability to breed animals (excepting Ocelots and Wolves) by tossing their breeding food on the ground near them.",
   "authors": [
-    "Me!"
+    "Gigabit101, Icynewyear"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/easy-breeding",
+    "sources": "https://github.com/icynewyear/easybreeding"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "GNU GENERAL PUBLIC LICENSE",
+  "icon": "",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "net.gigabit101.easybreeding.fabric.EasyBreedingFabric"
     ]
   },
   "depends": {
     "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": ">=1.16.4",
-    "architectury": ">=1.1.55"
+    "minecraft": ">=1.16.4"
   },
   "suggests": {
     "flamingo": "*"
-  }
+  },
+  "mixins": [
+    "easybreeding.mixins.jsonold"
+  ]
 }
