@@ -1,9 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "5.0.0"
-}
-
-configurations {
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 architectury {
@@ -12,27 +8,31 @@ architectury {
 }
 
 loom {
-    useFabricMixin = true
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    forge {
+        convertAccessWideners = true
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig "easybreeding.mixins.json"
+    }
 }
 
-loom {
-    mixinConfig "easybreeding.mixins.json"
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentForge.extendsFrom common
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
-//    modApi "me.shedaniel:architectury-forge:${rootProject.architectury_version}"
+    modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
-    implementation(project(path: ":common")) {
-        transitive = false
-    }
-    developmentForge(project(path: ":common")) {
-        transitive = false
-    }
-    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
-        transitive = false
-    }
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }
 
 processResources {
@@ -45,6 +45,7 @@ processResources {
 
 shadowJar {
     exclude "fabric.mod.json"
+    exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
     classifier "dev-shadow"
@@ -53,15 +54,11 @@ shadowJar {
 remapJar {
     input.set shadowJar.archiveFile
     dependsOn shadowJar
-    classifier "forge"
+    classifier null
 }
 
 jar {
     classifier "dev"
-}
-
-java {
-    withSourcesJar()
 }
 
 sourcesJar {
@@ -70,17 +67,17 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
 publishing {
     publications {
         mavenForge(MavenPublication) {
             artifactId = rootProject.archives_base_name + "-" + project.name
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                classifier null
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
+            from components.java
         }
     }
 

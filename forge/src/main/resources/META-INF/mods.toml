@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[35,)"
+loaderVersion = "[43,)"
 #issueTrackerURL = ""
 license = "GNU GENERAL PUBLIC LICENSE"
 
@@ -13,16 +13,16 @@ Easy Breeding adds the ability to breed animals (excepting Ocelots and Wolves) b
 '''
 #logoFile = ""
 
-[[dependencies.examplemod]]
+[[dependencies.easybreeding]]
 modId = "forge"
 mandatory = true
-versionRange = "[35,)"
+versionRange = "[43,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.easybreeding]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.16.2,)"
+versionRange = "[1.19.2,)"
 ordering = "NONE"
 side = "BOTH"

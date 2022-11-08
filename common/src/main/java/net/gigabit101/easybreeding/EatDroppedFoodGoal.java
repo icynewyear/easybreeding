@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class EatDroppedFoodGoal extends Goal
 {
-    private Animal animal;
+    private final Animal animal;
 
     public EatDroppedFoodGoal(Animal animal)
     {
